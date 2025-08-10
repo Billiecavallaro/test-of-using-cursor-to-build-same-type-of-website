@@ -345,9 +345,8 @@ body {
 /* Contact Window */
 .contact-window {
     position: absolute;
-    top: calc(50% - 60px);
+    top: 200px;
     left: 120px;
-    transform: translateY(-50%);
     width: 280px;
     background: #f0f0f0;
     border: 2px solid #999;
