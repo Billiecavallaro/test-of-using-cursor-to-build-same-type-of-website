@@ -1,0 +1,621 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Chicago', 'Geneva', 'Helvetica', sans-serif;
+    overflow: hidden;
+    height: 100vh;
+    background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 100%);
+}
+
+/* Desktop container */
+.desktop {
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 100%);
+    background-image: 
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%);
+}
+
+/* Menu Bar */
+.menu-bar {
+    height: 22px;
+    background: linear-gradient(to bottom, #f0f0f0 0%, #d0d0d0 100%);
+    border-bottom: 1px solid #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.menu-left {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.apple-logo {
+    font-size: 14px;
+}
+
+.menu-item {
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.menu-item:hover {
+    background: #4a90e2;
+    color: white;
+}
+
+.menu-right {
+    font-size: 11px;
+}
+
+/* Desktop Area */
+.desktop-area {
+    height: calc(100vh - 22px - 200px);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 20px;
+    align-content: start;
+}
+
+/* Folder Styles */
+.folder, .trash-can, .bart-character {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    user-select: none;
+    max-width: 80px;
+}
+
+/* Specific folder positioning */
+.folder[data-external*="Billie-Cavallaro"] {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+}
+
+.folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+}
+
+.folder[data-page="music.html"] {
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+}
+
+.folder[data-page="photos.html"] {
+    grid-column: 4;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+}
+
+.folder[data-page="press.html"] {
+    grid-column: 5;
+    grid-row: 1;
+    justify-self: start;
+    align-self: start;
+}
+
+/* Billie Character */
+.bart-character {
+    grid-column: 1;
+    grid-row: 2;
+    justify-self: start;
+    align-self: start;
+    cursor: default;
+}
+
+.bart-character:hover {
+    transform: scale(1.05);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.bart-icon {
+    margin-bottom: 5px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+.bart-icon img {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+    object-fit: cover;
+    display: block;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.bart-label {
+    font-size: 11px;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+.folder:hover, .trash-can:hover {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    transform: scale(1.05);
+}
+
+.folder:active, .trash-can:active {
+    transform: scale(0.95);
+}
+
+.folder-icon, .trash-icon {
+    font-size: 48px;
+    margin-bottom: 5px;
+    filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+}
+
+/* Classic yellow folder styling */
+.classic-folder {
+    width: 48px;
+    height: 36px;
+    background: linear-gradient(135deg, #f4d03f 0%, #f1c40f 50%, #e67e22 100%);
+    border-radius: 4px 4px 2px 2px;
+    position: relative;
+    box-shadow: 
+        inset 0 1px 0 rgba(255,255,255,0.3),
+        inset 0 -1px 0 rgba(0,0,0,0.2),
+        2px 2px 6px rgba(0,0,0,0.3);
+    border: 1px solid #d68910;
+}
+
+.classic-folder::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 8px;
+    width: 16px;
+    height: 8px;
+    background: linear-gradient(135deg, #f4d03f 0%, #f1c40f 50%, #e67e22 100%);
+    border-radius: 3px 3px 0 0;
+    border: 1px solid #d68910;
+    border-bottom: none;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+.classic-folder::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, transparent 50%);
+    border-radius: 2px;
+}
+
+.folder-label, .trash-label {
+    font-size: 11px;
+    color: white;
+    text-align: center;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+    font-weight: bold;
+    line-height: 1.2;
+}
+
+/* Trash can positioning */
+.trash-can {
+    grid-column: 6;
+    grid-row: 4;
+    justify-self: end;
+    align-self: end;
+}
+
+/* Terminal Styles */
+.terminal {
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    right: 20px;
+    height: calc(100vh - 1090px);
+    background: #000;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.3);
+    font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+    overflow: hidden;
+}
+
+.terminal-header {
+    height: 24px;
+    background: linear-gradient(to bottom, #e8e8e8 0%, #d0d0d0 100%);
+    border-bottom: 1px solid #999;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.terminal-button.close {
+    background: linear-gradient(to bottom, #ff5f57 0%, #ff3b30 100%);
+}
+
+.terminal-button.minimize {
+    background: linear-gradient(to bottom, #ffbd2e 0%, #ff9500 100%);
+}
+
+.terminal-button.maximize {
+    background: linear-gradient(to bottom, #28ca42 0%, #00c851 100%);
+}
+
+.terminal-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+.terminal-body {
+    height: calc(140px - 25px);
+    background: #000;
+    color: #00ff00;
+    padding: 8px 12px;
+    font-size: 11px;
+    line-height: 1.4;
+    overflow-y: auto;
+}
+
+.terminal-line {
+    margin: 2px 0;
+    display: flex;
+    align-items: center;
+}
+
+.prompt {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.command {
+    color: #ffffff;
+    margin-left: 4px;
+}
+
+.system-msg {
+    color: #888;
+    font-style: italic;
+}
+
+.cursor {
+    color: #00ff00;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.interaction-log {
+    color: #ffff00;
+}
+
+.error-log {
+    color: #ff4444;
+}
+
+.success-log {
+    color: #44ff44;
+}
+
+/* Contact Window */
+.contact-window {
+    position: absolute;
+    top: calc(50% - 60px);
+    left: 120px;
+    transform: translateY(-50%);
+    width: 280px;
+    background: #f0f0f0;
+    border: 2px solid #999;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    font-family: 'Chicago', 'Geneva', 'Helvetica', sans-serif;
+    overflow: hidden;
+    display: none;
+}
+
+.window-header {
+    height: 24px;
+    background: linear-gradient(to bottom, #e8e8e8 0%, #d0d0d0 100%);
+    border-bottom: 1px solid #999;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+    cursor: move;
+}
+
+.window-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.window-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.window-button.close {
+    background: linear-gradient(to bottom, #ff5f57 0%, #ff3b30 100%);
+}
+
+.window-button.minimize {
+    background: linear-gradient(to bottom, #ffbd2e 0%, #ff9500 100%);
+}
+
+.window-button.maximize {
+    background: linear-gradient(to bottom, #28ca42 0%, #00c851 100%);
+}
+
+.window-button:hover {
+    transform: scale(1.1);
+}
+
+.window-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    user-select: none;
+}
+
+.window-body {
+    background: #f0f0f0;
+    padding: 15px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.contact-content p {
+    margin: 8px 0;
+    color: #333;
+}
+
+.contact-content strong {
+    color: #000;
+    font-weight: bold;
+}
+
+.contact-content a {
+    color: #4a90e2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.contact-content a:hover {
+    text-decoration: underline;
+    color: #357abd;
+}
+
+/* Image Popup Window */
+.image-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #f0f0f0;
+    border: 2px solid #999;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    font-family: 'Chicago', 'Geneva', 'Helvetica', sans-serif;
+    z-index: 1000;
+    min-width: 400px;
+    max-width: 80vw;
+    max-height: 80vh;
+}
+
+.popup-header {
+    height: 24px;
+    background: linear-gradient(to bottom, #e8e8e8 0%, #d0d0d0 100%);
+    border-bottom: 1px solid #999;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    position: relative;
+    cursor: move;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.popup-button {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+.popup-button.close {
+    background: linear-gradient(to bottom, #ff5f57 0%, #ff3b30 100%);
+    color: white;
+}
+
+.popup-button:hover {
+    transform: scale(1.1);
+}
+
+.popup-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    user-select: none;
+}
+
+.popup-body {
+    background: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.popup-image {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* Article page styles */
+.article-container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: white;
+    min-height: 100vh;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
+}
+
+.article-header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.article-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.article-subtitle {
+    font-size: 18px;
+    color: #666;
+    font-style: italic;
+}
+
+.article-content {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 40px;
+}
+
+.article-content h2 {
+    font-size: 24px;
+    margin: 30px 0 15px 0;
+    color: #333;
+}
+
+.article-content p {
+    margin-bottom: 20px;
+}
+
+.youtube-embed {
+    margin: 30px 0;
+    text-align: center;
+}
+
+.youtube-embed iframe {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #4a90e2;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: background 0.2s ease;
+}
+
+.back-button:hover {
+    background: #357abd;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .desktop-area {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(6, 1fr);
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .folder, .trash-can {
+        max-width: 70px;
+    }
+    
+    .folder-icon, .trash-icon {
+        font-size: 36px;
+    }
+    
+    .folder-label, .trash-label {
+        font-size: 10px;
+    }
+    
+    .contact-section {
+        font-size: 10px;
+        padding: 10px 15px;
+    }
+} 

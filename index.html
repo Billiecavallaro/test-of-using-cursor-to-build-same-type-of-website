@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Desktop</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="desktop">
+        <!-- Menu Bar -->
+        <div class="menu-bar">
+            <div class="menu-left">
+                <span class="apple-logo">🍒</span>
+                <span class="menu-item">File</span>
+                <span class="menu-item">Edit</span>
+                <span class="menu-item">View</span>
+                <span class="menu-item">Special</span>
+            </div>
+            <div class="menu-right">
+                <span id="current-time"></span>
+            </div>
+        </div>
+
+        <!-- Desktop Area -->
+        <div class="desktop-area">
+            <!-- Billie Photo Character -->
+            <div class="bart-character">
+                <div class="bart-icon">
+                    <img src="https://i.imgur.com/E9e08VM.png" alt="Billie" width="48" height="48" style="border-radius: 8px; object-fit: cover;">
+                </div>
+                <div class="bart-label">Billie</div>
+            </div>
+
+            <!-- Folder Icons -->
+            <div class="folder" data-page="music.html">
+                <div class="folder-icon">
+                    <div class="classic-folder"></div>
+                </div>
+                <div class="folder-label">Music</div>
+            </div>
+
+            <div class="folder" data-page="photos.html">
+                <div class="folder-icon">
+                    <div class="classic-folder"></div>
+                </div>
+                <div class="folder-label">Photos</div>
+            </div>
+
+            <div class="folder" data-external="https://www.notion.so/Billie-Cavallaro-249e7f3f02bb80d28e73eaeeb5a62bb9">
+                <div class="folder-icon">
+                    <div class="classic-folder"></div>
+                </div>
+                <div class="folder-label">About Me</div>
+            </div>
+
+            <div class="folder" data-page="press.html">
+                <div class="folder-icon">
+                    <div class="classic-folder"></div>
+                </div>
+                <div class="folder-label">Press</div>
+            </div>
+
+            <div class="folder" data-external="https://www.notion.so/249e7f3f02bb80b687abf03314aecf5a?v=249e7f3f02bb818e85a5000c84023268">
+                <div class="folder-icon">
+                    <div class="classic-folder"></div>
+                </div>
+                <div class="folder-label">Portfolio</div>
+            </div>
+
+            <!-- Trash Can -->
+            <div class="trash-can" data-image="https://i.imgur.com/OxJ5cgT.png">
+                <div class="trash-icon">🗑️</div>
+                <div class="trash-label">Trash</div>
+            </div>
+
+            <!-- Image Popup Window -->
+            <div class="image-popup" id="imagePopup" style="display: none;">
+                <div class="popup-header">
+                    <div class="popup-buttons">
+                        <span class="popup-button close" id="closePopup">×</span>
+                    </div>
+                    <div class="popup-title">Trash Contents</div>
+                </div>
+                <div class="popup-body">
+                    <img src="https://i.imgur.com/OxJ5cgT.png" alt="Trash Contents" class="popup-image">
+                </div>
+            </div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <span class="terminal-button close"></span>
+                    <span class="terminal-button minimize"></span>
+                    <span class="terminal-button maximize"></span>
+                </div>
+                <div class="terminal-title">Terminal</div>
+            </div>
+            <div class="terminal-body">
+                <div id="terminal-output">
+                    <div class="terminal-line">
+                        <span class="prompt">user@portfolio:~$ </span>
+                        <span class="command">system_boot</span>
+                    </div>
+                    <div class="terminal-line system-msg">Portfolio Desktop v2.0 initialized...</div>
+                    <div class="terminal-line system-msg">Monitoring user interactions...</div>
+                    <div class="terminal-line">
+                        <span class="prompt">user@portfolio:~$ </span>
+                        <span class="cursor">_</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Window -->
+        <div class="contact-window">
+            <div class="window-header">
+                <div class="window-buttons">
+                    <span class="window-button close"></span>
+                    <span class="window-button minimize"></span>
+                    <span class="window-button maximize"></span>
+                </div>
+                <div class="window-title">Contact Me</div>
+            </div>
+            <div class="window-body">
+                <div class="contact-content">
+                    <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="#" target="_blank">Your LinkedIn</a></p>
+                    <p><strong>Instagram:</strong> <a href="#" target="_blank">Your Instagram</a></p>
+                    <p><strong>YouTube:</strong> <a href="#" target="_blank">Your YouTube</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
