@@ -11,7 +11,7 @@
         <!-- Menu Bar -->
         <div class="menu-bar">
             <div class="menu-left">
-                <span class="apple-logo">🍒</span>
+                <span class="apple-logo">B</span>
                 <span class="menu-item">File</span>
                 <span class="menu-item">Edit</span>
                 <span class="menu-item">View</span>
@@ -27,25 +27,141 @@
             <!-- Billie Photo Character -->
             <div class="bart-character">
                 <div class="bart-icon">
-                    <img src="https://i.imgur.com/E9e08VM.png" alt="Billie" width="48" height="48" style="border-radius: 8px; object-fit: cover;">
+                    <img src="https://i.imgur.com/E9e08VM.png" alt="Billie" width="58" height="58" style="border-radius: 8px; object-fit: cover;">
                 </div>
-                <div class="bart-label">Billie</div>
+                <div class="bart-label">Contact Billie</div>
             </div>
 
             <!-- Folder Icons -->
-            <div class="folder" data-page="music.html">
+            <div class="folder" data-music="true">
                 <div class="folder-icon">
                     <div class="classic-folder"></div>
                 </div>
                 <div class="folder-label">Music</div>
             </div>
 
-            <div class="folder" data-page="photos.html">
+            <!-- Music Recording Window -->
+            <div class="music-window" id="musicWindow" style="display: none;">
+                <div class="window-header">
+                    <div class="window-buttons">
+                        <span class="window-button close" id="closeMusicWindow">×</span>
+                    </div>
+                    <div class="window-title">Music Studio</div>
+                </div>
+                <div class="window-body">
+                    <div class="music-content">
+                        <div class="recording-section">
+                            <h3>🎤 Record Your Music</h3>
+                            <div class="recording-controls">
+                                <button id="recordButton" class="music-button">🔴 Start Recording</button>
+                                <button id="stopButton" class="music-button" disabled>⏹️ Stop Recording</button>
+                                <button id="playButton" class="music-button" disabled>▶️ Play Recording</button>
+                            </div>
+                            <div class="recording-status">
+                                <span id="recordingStatus">Ready to record...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="sound-library">
+                            <h3>🎵 Sound Library</h3>
+                            <div class="sound-buttons">
+                                <button class="sound-button" data-sound="drum">🥁 Drum Beat</button>
+                                <button class="sound-button" data-sound="piano">🎹 Piano</button>
+                                <button class="sound-button" data-sound="guitar">🎸 Guitar</button>
+                                <button class="sound-button" data-sound="bass">🎸 Bass</button>
+                                <button class="sound-button" data-sound="synth">🎛️ Synth</button>
+                                <button class="sound-button" data-sound="fx">✨ FX</button>
+                            </div>
+                        </div>
+                        
+                        <div class="mixer-section">
+                            <h3>🎚️ Mixer</h3>
+                            <div class="volume-controls">
+                                <label>Master Volume: <span id="masterVolume">50%</span></label>
+                                <input type="range" id="masterSlider" min="0" max="100" value="50">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="folder" data-photos="true">
                 <div class="folder-icon">
                     <div class="classic-folder"></div>
                 </div>
                 <div class="folder-label">Photos</div>
             </div>
+
+            <!-- Photo Gallery Window -->
+            <div class="gallery-window" id="galleryWindow" style="display: none;">
+                <div class="title-bar">
+                    <div class="traffic-lights">
+                        <div class="light red" onclick="closeGalleryWindow()" title="Close"></div>
+                        <div class="light yellow" title="Minimize"></div>
+                        <div class="light green" title="Maximize"></div>
+                    </div>
+                    <div class="window-title">Photo Gallery</div>
+                </div>
+                
+                <div class="content">
+                    
+                    <div class="gallery-grid" id="galleryGrid">
+                        <div class="photo-item" data-src="https://i.imgur.com/E9e08VM.png" data-name="Portrait_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/E9e08VM.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Portrait_001.jpg</div>
+                        </div>
+                        <div class="photo-item" data-src="https://i.imgur.com/OxJ5cgT.png" data-name="Landscape_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/OxJ5cgT.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Landscape_001.jpg</div>
+                        </div>
+                        <div class="photo-item" data-src="https://i.imgur.com/Ar7pfvK.png" data-name="Abstract_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/Ar7pfvK.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Abstract_001.jpg</div>
+                        </div>
+                        <div class="photo-item" data-src="https://i.imgur.com/gDHOczH.png" data-name="Street_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/gDHOczH.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Street_001.jpg</div>
+                        </div>
+                        <div class="photo-item" data-src="https://i.imgur.com/lwSjskz.png" data-name="Experimental_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/lwSjskz.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Experimental_001.jpg</div>
+                        </div>
+                        <div class="photo-item" data-src="https://i.imgur.com/1xgRZfE.png" data-name="Nature_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/1xgRZfE.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Nature_001.jpg</div>
+                        </div>
+                        <div class="photo-item" data-src="https://i.imgur.com/isnCEHd.png" data-name="Portfolio_001.jpg">
+                            <div class="photo-placeholder" style="background-image: url('https://i.imgur.com/isnCEHd.png'); background-size: cover; background-position: center;"></div>
+                            <div class="photo-name">Portfolio_001.jpg</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-bar">
+                    <span id="photoCount">7 photos</span>
+                    <span>Mac OS X Photo Gallery v1.0</span>
+                </div>
+            </div>
+            
+                <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-title-bar">
+                <div class="modal-traffic-lights">
+                    <div class="modal-light red" onclick="closeModal()" title="Close"></div>
+                    <div class="modal-light yellow" title="Minimize"></div>
+                    <div class="modal-light green" title="Maximize"></div>
+                </div>
+                <div class="modal-window-title" id="modalTitle">Photo Viewer</div>
+            </div>
+            <div class="modal-body">
+                <div id="modalImage"></div>
+                <div id="modalInfo"></div>
+                <div class="modal-buttons">
+                    <button class="close-btn" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
             <div class="folder" data-external="https://www.notion.so/Billie-Cavallaro-249e7f3f02bb80d28e73eaeeb5a62bb9">
                 <div class="folder-icon">
@@ -54,7 +170,7 @@
                 <div class="folder-label">About Me</div>
             </div>
 
-            <div class="folder" data-page="press.html">
+            <div class="folder" data-external="https://www.notion.so/Press-249e7f3f02bb80b19ddadcccfeec8358">
                 <div class="folder-icon">
                     <div class="classic-folder"></div>
                 </div>
@@ -126,10 +242,10 @@
             </div>
             <div class="window-body">
                 <div class="contact-content">
-                    <p><strong>Email:</strong> <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-                    <p><strong>LinkedIn:</strong> <a href="#" target="_blank">Your LinkedIn</a></p>
-                    <p><strong>Instagram:</strong> <a href="#" target="_blank">Your Instagram</a></p>
-                    <p><strong>YouTube:</strong> <a href="#" target="_blank">Your YouTube</a></p>
+                    <p><strong>Email:</strong> <a href="mailto:billiejocavallaro@gmail.com">billiejocavallaro@gmail.com</a></p>
+                    <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/billiecavallaro/" target="_blank">Billie Cavallaro</a></p>
+                    <p><strong>Instagram:</strong> <a href="https://www.instagram.com/billie_jo_cavallaro/?hl=en" target="_blank">@billie_jo_cavallaro</a></p>
+                    <p><strong>YouTube:</strong> <a href="#" target="_blank">BillieCavallaro-AIProductBuild</a></p>
                 </div>
             </div>
         </div>

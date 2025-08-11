@@ -68,12 +68,33 @@ document.addEventListener('DOMContentLoaded', function() {
                     logToTerminal(`User opened external link: ${folderName} → Notion About Me`);
                 } else if (folderName === "Portfolio") {
                     logToTerminal(`User opened external link: ${folderName} → Notion Portfolio`);
+                } else if (folderName === "Press") {
+                    logToTerminal(`User opened external link: ${folderName} → Notion Press`);
                 } else {
                     logToTerminal(`User opened external link: ${folderName} → ${external}`);
                 }
                 // Open external link in new tab
                 setTimeout(() => {
                     window.open(external, '_blank');
+                }, 100);
+            } else if (this.getAttribute('data-music')) {
+                logToTerminal(`User opened Music Studio window`, 'interaction');
+                setTimeout(() => {
+                    logToTerminal('Opening music recording interface...', 'system');
+                    document.getElementById('musicWindow').style.display = 'block';
+                }, 100);
+            } else if (this.getAttribute('data-photos')) {
+                logToTerminal(`User opened Photo Gallery window`, 'interaction');
+                setTimeout(() => {
+                    logToTerminal('Opening photo gallery interface...', 'system');
+                    document.getElementById('galleryWindow').style.display = 'block';
+                    // Set up photo click handlers after gallery is opened
+                    setupPhotoHandlers();
+                    
+                    // Debug: Check if download buttons exist
+                    const downloadButtons = document.querySelectorAll('.photo-download-btn');
+                    console.log('Found download buttons:', downloadButtons.length);
+                    logToTerminal(`Found ${downloadButtons.length} download buttons`, 'system');
                 }, 100);
             }
         });
@@ -171,6 +192,14 @@ document.addEventListener('DOMContentLoaded', function() {
             logToTerminal('User clicked outside popup to close', 'interaction');
             imagePopup.style.display = 'none';
         }
+        if (event.target === musicWindow) {
+            logToTerminal('User clicked outside music window to close', 'interaction');
+            musicWindow.style.display = 'none';
+        }
+        if (event.target === galleryWindow) {
+            logToTerminal('User clicked outside gallery window to close', 'interaction');
+            galleryWindow.style.display = 'none';
+        }
     });
     
     // Billie character interaction
@@ -221,7 +250,275 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Log page load
-    logToTerminal('Desktop environment loaded successfully', 'success');
-    logToTerminal('Ready for user interaction...', 'system');
-}); 
+    // Music window interactions
+    const musicWindow = document.getElementById('musicWindow');
+    const closeMusicWindow = document.getElementById('closeMusicWindow');
+    const recordButton = document.getElementById('recordButton');
+    const stopButton = document.getElementById('stopButton');
+    const playButton = document.getElementById('playButton');
+    const soundButtons = document.querySelectorAll('.sound-button');
+    const masterSlider = document.getElementById('masterSlider');
+    const masterVolume = document.getElementById('masterVolume');
+    const recordingStatus = document.getElementById('recordingStatus');
+    
+    let mediaRecorder;
+    let audioChunks = [];
+    let isRecording = false;
+    
+    if (closeMusicWindow) {
+        closeMusicWindow.addEventListener('click', function() {
+            logToTerminal('User closed Music Studio window', 'interaction');
+            musicWindow.style.display = 'none';
+        });
+    }
+    
+    if (recordButton) {
+        recordButton.addEventListener('click', function() {
+            if (!isRecording) {
+                startRecording();
+            }
+        });
+    }
+    
+    if (stopButton) {
+        stopButton.addEventListener('click', function() {
+            if (isRecording) {
+                stopRecording();
+            }
+        });
+    }
+    
+    if (playButton) {
+        playButton.addEventListener('click', function() {
+            playRecording();
+        });
+    }
+    
+    // Sound library interactions
+    soundButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const sound = this.getAttribute('data-sound');
+            logToTerminal(`User played ${sound} sound`, 'interaction');
+            playSound(sound);
+        });
+    });
+    
+    // Volume control
+    if (masterSlider) {
+        masterSlider.addEventListener('input', function() {
+            const volume = this.value;
+            masterVolume.textContent = volume + '%';
+            logToTerminal(`Master volume set to ${volume}%`, 'system');
+        });
+    }
+    
+    // Recording functions
+    async function startRecording() {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+            
+            mediaRecorder.ondataavailable = (event) => {
+                audioChunks.push(event.data);
+            };
+            
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(audioBlob);
+                window.recordedAudio = audioUrl;
+            };
+            
+            mediaRecorder.start();
+            isRecording = true;
+            recordButton.disabled = true;
+            stopButton.disabled = false;
+            recordingStatus.textContent = '🔴 Recording...';
+            logToTerminal('Recording started', 'success');
+        } catch (error) {
+            logToTerminal('Error starting recording: ' + error.message, 'error');
+            recordingStatus.textContent = 'Error: Could not access microphone';
+        }
+    }
+    
+    function stopRecording() {
+        if (mediaRecorder && isRecording) {
+            mediaRecorder.stop();
+            mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            isRecording = false;
+            recordButton.disabled = false;
+            stopButton.disabled = true;
+            playButton.disabled = false;
+            recordingStatus.textContent = '✅ Recording saved!';
+            logToTerminal('Recording stopped', 'success');
+        }
+    }
+    
+    function playRecording() {
+        if (window.recordedAudio) {
+            const audio = new Audio(window.recordedAudio);
+            audio.play();
+            logToTerminal('Playing recorded audio', 'success');
+        }
+    }
+    
+    function playSound(sound) {
+        // Simple sound simulation - in a real app you'd load actual audio files
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        // Different frequencies for different sounds
+        const frequencies = {
+            drum: 100,
+            piano: 440,
+            guitar: 220,
+            bass: 110,
+            synth: 880,
+            fx: 660
+        };
+        
+        oscillator.frequency.setValueAtTime(frequencies[sound] || 440, audioContext.currentTime);
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        
+        oscillator.start();
+            oscillator.stop(audioContext.currentTime + 0.5);
+}
+
+// Gallery window interactions - Download Only
+const galleryWindow = document.getElementById('galleryWindow');
+let currentPhoto = null; // Global variable for current photo
+
+// Modal close handling
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    }
+    
+});
+
+// Function to set up photo click handlers
+function setupPhotoHandlers() {
+    const photoItems = document.querySelectorAll('.photo-item');
+    logToTerminal(`Setting up click handlers for ${photoItems.length} photos`, 'system');
+    
+    photoItems.forEach(item => {
+        // Remove any existing click handlers to prevent duplicates
+        item.removeEventListener('click', photoClickHandler);
+        // Add new click handler
+        item.addEventListener('click', photoClickHandler);
+    });
+}
+
+// Photo click handler function
+function photoClickHandler() {
+    const src = this.getAttribute('data-src');
+    const name = this.getAttribute('data-name');
+    logToTerminal(`Photo clicked: ${name}`, 'system');
+    viewPhoto(src, name);
+}
+
+function viewPhoto(src, name) {
+    logToTerminal(`viewPhoto called with: ${name}`, 'system');
+    currentPhoto = { src, name };
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+    const modalInfo = document.getElementById('modalInfo');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    if (!modal || !modalImage || !modalInfo || !modalTitle) {
+        logToTerminal('Error: Modal elements not found', 'error');
+        return;
+    }
+    
+    modalImage.innerHTML = `<img src="${src}" class="modal-image" alt="${name}">`;
+    modalInfo.innerHTML = `<h4>${name}</h4>`;
+    modalTitle.textContent = `Photo Viewer - ${name}`;
+    
+    modal.style.display = 'flex';
+    console.log('Modal displayed:', modal.style.display);
+    logToTerminal(`User viewed photo: ${name}`, 'interaction');
+}
+
+
+
+function shufflePhotos() {
+    const grid = document.getElementById('galleryGrid');
+    const photoItems = Array.from(grid.children);
+    
+    // Fisher-Yates shuffle
+    for (let i = photoItems.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        grid.appendChild(photoItems[j]);
+    }
+    
+    logToTerminal('User shuffled photos in gallery', 'interaction');
+}
+
+function showAbout() {
+    const modal = document.getElementById('modal');
+    const modalImage = document.getElementById('modalImage');
+    const modalInfo = document.getElementById('modalInfo');
+    const modalTitle = document.getElementById('modalTitle');
+    
+    modalImage.innerHTML = '';
+    modalInfo.innerHTML = `
+        <h3>Mac OS X Photo Gallery</h3>
+        <p>A nostalgic recreation of early 2000s Mac photo management software.</p>
+        <p>Features the classic Aqua interface with brushed metal styling.</p>
+        <p><strong>Current Features:</strong></p>
+        <ul style="text-align: left; margin: 10px 0;">
+            <li>View photos in full-size modal</li>
+            <li>Download individual photos</li>
+            <li>Download all photos at once</li>
+            <li>Shuffle gallery layout</li>
+        </ul>
+    `;
+    modalTitle.textContent = 'About Photo Gallery';
+    
+    modal.style.display = 'flex';
+    logToTerminal('User opened About dialog', 'interaction');
+}
+
+});
+
+// Global function to close modal
+function closeModal() {
+    console.log('closeModal function called');
+    const modal = document.getElementById('modal');
+    if (modal) {
+        modal.style.display = 'none';
+        currentPhoto = null;
+        logToTerminal('User clicked red traffic light to close photo viewer', 'interaction');
+        console.log('Modal closed successfully');
+    } else {
+        console.log('Modal element not found');
+        logToTerminal('Error: Modal element not found', 'error');
+    }
+}
+
+// Global function to close gallery window
+function closeGalleryWindow() {
+    console.log('closeGalleryWindow function called');
+    const galleryWindow = document.getElementById('galleryWindow');
+    if (galleryWindow) {
+        galleryWindow.style.display = 'none';
+        logToTerminal('User clicked red traffic light to close photo gallery', 'interaction');
+        console.log('Gallery window closed successfully');
+    } else {
+        console.log('Gallery window element not found');
+        logToTerminal('Error: Gallery window element not found', 'error');
+    }
+}
+
+// Log page load
+logToTerminal('Desktop environment loaded successfully', 'success');
+logToTerminal('Ready for user interaction...', 'system'); 
