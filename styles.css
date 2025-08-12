@@ -44,17 +44,12 @@ body {
 }
 
 .apple-logo {
-    font-size: 18px;
-    font-weight: bold;
+    font-size: 16px;
     color: #00FFFF; /* Aqua color */
     text-shadow: 
         0 1px 2px rgba(0,0,0,0.3), /* Subtle shadow for depth */
         0 0 10px rgba(0,255,255,0.5); /* Aqua glow effect */
-    background: linear-gradient(135deg, #00FFFF 0%, #00CCCC 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-family: 'Arial Black', 'Helvetica Bold', sans-serif;
+    filter: hue-rotate(180deg) saturate(1.5) brightness(1.2);
 }
 
 .menu-item {
@@ -66,6 +61,83 @@ body {
 .menu-item:hover {
     background: #4a90e2;
     color: white;
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+    position: relative;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+    border: 1px solid #999;
+    border-radius: 5px;
+    box-shadow: 
+        0 4px 8px rgba(0,0,0,0.3),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+    min-width: 180px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    font-family: 'Lucida Grande', 'Geneva', sans-serif;
+    font-size: 12px;
+}
+
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+    color: #333;
+    transition: background 0.1s ease;
+    position: relative;
+    z-index: 1001;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover {
+    background: linear-gradient(135deg, #0066cc 0%, #0055aa 100%);
+    color: white;
+}
+
+.dropdown-separator {
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, #999 50%, transparent 100%);
+    margin: 4px 0;
+}
+
+.dropdown-trigger {
+    display: inline-block;
+}
+
+/* Joke item styling */
+.joke-item {
+    color: #666 !important;
+    font-style: italic;
+    text-align: center;
+    background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%) !important;
+    border: 1px dashed #ff9933 !important;
+}
+
+.joke-item:hover {
+    background: linear-gradient(135deg, #ff9933 0%, #ff8000 100%) !important;
+    color: white !important;
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(255, 153, 51, 0.4);
 }
 
 .menu-right {
@@ -94,6 +166,8 @@ body {
     transition: all 0.2s ease;
     user-select: none;
     max-width: 80px;
+    height: 80px;
+    justify-content: center;
 }
 
 /* Specific folder positioning */
@@ -111,19 +185,7 @@ body {
     align-self: start;
 }
 
-.folder[data-page="music.html"] {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: start;
-    align-self: start;
-}
 
-.folder[data-page="photos.html"] {
-    grid-column: 4;
-    grid-row: 1;
-    justify-self: start;
-    align-self: start;
-}
 
 .folder[data-external*="Press"] {
     grid-column: 5;
@@ -170,10 +232,13 @@ body {
     line-height: 1.2;
 }
 
+/* Simple, consistent hover effect for all folders */
 .folder:hover, .trash-can:hover {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
+    background: rgba(173, 216, 230, 0.4);
     transform: scale(1.05);
+    transition: all 0.2s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .folder:active, .trash-can:active {
@@ -225,11 +290,11 @@ body {
     border-radius: 2px;
 }
 
-/* Portfolio folder - Blue */
+/* Portfolio folder - Aqua */
 .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] .classic-folder,
 .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] .classic-folder::before {
-    background: linear-gradient(135deg, #3498db 0%, #2980b9 50%, #1f4e79 100%);
-    border-color: #1f4e79;
+    background: linear-gradient(135deg, #00FFFF 0%, #00CCCC 50%, #009999 100%);
+    border-color: #009999;
 }
 
 /* Music folder - Purple */
@@ -424,6 +489,14 @@ body {
 
 .window-button.close {
     background: linear-gradient(to bottom, #ff5f57 0%, #ff3b30 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+    color: #800000;
+    text-shadow: 0 1px 1px rgba(255,255,255,0.3);
+    line-height: 1;
 }
 
 .window-button.minimize {

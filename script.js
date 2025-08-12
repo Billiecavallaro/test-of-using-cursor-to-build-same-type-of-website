@@ -130,6 +130,176 @@ document.addEventListener('DOMContentLoaded', function() {
             logToTerminal('User clicked on desktop background', 'system');
         }
     });
+
+    // Dropdown Menu Functionality
+    const dropdowns = document.querySelectorAll('.dropdown');
+    const fileDropdown = dropdowns[0]; // File dropdown
+    const editDropdown = dropdowns[1]; // Edit dropdown
+    
+    // File dropdown functionality
+    const fileDropdownTrigger = fileDropdown.querySelector('.dropdown-trigger');
+    const fileDropdownMenu = fileDropdown.querySelector('.dropdown-menu');
+
+    // Toggle dropdown on click
+    fileDropdownTrigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        console.log('File dropdown trigger clicked');
+        fileDropdown.classList.toggle('active');
+        console.log('Dropdown active:', fileDropdown.classList.contains('active'));
+        logToTerminal('File menu ' + (fileDropdown.classList.contains('active') ? 'opened' : 'closed'));
+        
+        // Test if dropdown items are accessible
+        if (fileDropdown.classList.contains('active')) {
+            const items = fileDropdownMenu.querySelectorAll('.dropdown-item');
+            console.log('Found dropdown items:', items.length);
+            items.forEach((item, index) => {
+                console.log(`Item ${index}:`, item.textContent, item.getAttribute('data-action'));
+            });
+        }
+    });
+
+    // Edit dropdown functionality
+    const editDropdownTrigger = editDropdown.querySelector('.dropdown-trigger');
+    const editDropdownMenu = editDropdown.querySelector('.dropdown-menu');
+
+    // Toggle edit dropdown on click
+    editDropdownTrigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        editDropdown.classList.toggle('active');
+        logToTerminal('Edit menu ' + (editDropdown.classList.contains('active') ? 'opened' : 'closed'));
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!fileDropdown.contains(e.target)) {
+            fileDropdown.classList.remove('active');
+        }
+        if (!editDropdown.contains(e.target)) {
+            editDropdown.classList.remove('active');
+        }
+        
+        // Global click handler for dropdown items
+        if (e.target.classList.contains('dropdown-item')) {
+            console.log('Global click detected on dropdown item:', e.target.textContent);
+            const action = e.target.getAttribute('data-action');
+            console.log('Action from global handler:', action);
+            
+            if (action === 'about-me') {
+                console.log('Global handler opening About Me page');
+                logToTerminal('Global handler - opening About Me page', 'system');
+                window.open('https://www.notion.so/Billie-Cavallaro-249e7f3f02bb80d28e73eaeeb5a62bb9', '_blank');
+                fileDropdown.classList.remove('active');
+            }
+        }
+    });
+
+    // Toggle dropdown on click
+    dropdownTrigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+        logToTerminal('File menu ' + (dropdown.classList.contains('active') ? 'opened' : 'closed'));
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+
+    // Handle dropdown item clicks
+    fileDropdownMenu.addEventListener('click', function(e) {
+        console.log('Dropdown item clicked:', e.target);
+        console.log('Target classes:', e.target.className);
+        console.log('Target tag name:', e.target.tagName);
+        console.log('Event type:', e.type);
+        logToTerminal('Dropdown menu clicked: ' + e.target.textContent, 'system');
+        
+        if (e.target.classList.contains('dropdown-item')) {
+            const action = e.target.getAttribute('data-action');
+            console.log('Action:', action);
+            logToTerminal('File menu item clicked: ' + e.target.textContent);
+            
+            // Close dropdown
+            fileDropdown.classList.remove('active');
+            
+            // Handle different actions
+            switch(action) {
+                case 'about-me':
+                    console.log('About Me clicked - opening Notion page');
+                    logToTerminal('Opening About Me Notion page...', 'system');
+                    try {
+                        window.open('https://www.notion.so/Billie-Cavallaro-249e7f3f02bb80d28e73eaeeb5a62bb9', '_blank');
+                        console.log('Window.open called successfully');
+                    } catch (error) {
+                        console.error('Error opening window:', error);
+                        logToTerminal('Error opening About Me page: ' + error.message, 'error');
+                    }
+                    break;
+                case 'portfolio':
+                    window.open('https://www.notion.so/249e7f3f02bb80b687abf03314aecf5a?v=249e7f3f02bb818e85a5000c84023268', '_blank');
+                    break;
+                case 'music':
+                    const musicWindow = document.querySelector('.music-window');
+                    musicWindow.style.display = 'block';
+                    logToTerminal('Music Studio opened from File menu');
+                    break;
+                case 'photos':
+                    const galleryWindow = document.querySelector('.gallery-window');
+                    galleryWindow.style.display = 'block';
+                    setupPhotoHandlers();
+                    logToTerminal('Photo Gallery opened from File menu');
+                    break;
+                case 'press':
+                    window.open('https://www.notion.so/Press-249e7f3f02bb80b19ddadcccfeec8358', '_blank');
+                    break;
+                case 'contact':
+                    const contactWindow = document.querySelector('.contact-window');
+                    contactWindow.style.display = 'block';
+                    logToTerminal('Contact window opened from File menu');
+                    break;
+            }
+        }
+    });
+
+    // Handle edit dropdown item clicks (joke item)
+    editDropdownMenu.addEventListener('click', function(e) {
+        if (e.target.classList.contains('dropdown-item')) {
+            logToTerminal('Edit menu joke item clicked: ' + e.target.textContent, 'success');
+            
+            // Close dropdown
+            editDropdown.classList.remove('active');
+            
+            // Add a fun terminal message
+            setTimeout(() => {
+                logToTerminal('😄 Gotcha! No editing allowed here!', 'success');
+            }, 500);
+        }
+    });
+
+    // Direct click handlers for specific dropdown items as backup
+    setTimeout(() => {
+        const aboutMeItem = fileDropdownMenu.querySelector('[data-action="about-me"]');
+        console.log('About Me item found:', aboutMeItem);
+        if (aboutMeItem) {
+            aboutMeItem.addEventListener('click', function(e) {
+                console.log('Direct About Me click handler triggered');
+                e.stopPropagation();
+                logToTerminal('Direct About Me click - opening Notion page', 'system');
+                window.open('https://www.notion.so/Billie-Cavallaro-249e7f3f02bb80d28e73eaeeb5a62bb9', '_blank');
+                fileDropdown.classList.remove('active');
+            });
+            
+            // Also add a mousedown event as backup
+            aboutMeItem.addEventListener('mousedown', function(e) {
+                console.log('About Me mousedown triggered');
+                logToTerminal('About Me mousedown detected', 'system');
+            });
+        } else {
+            console.error('About Me item not found!');
+            logToTerminal('Error: About Me dropdown item not found', 'error');
+        }
+    }, 100);
     
     // Prevent context menu on desktop area for more authentic feel
     desktop.addEventListener('contextmenu', function(e) {
@@ -188,8 +358,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close popup when clicking outside
     window.addEventListener('click', function(event) {
+        const imagePopup = document.getElementById('imagePopup');
         if (event.target === imagePopup) {
-            logToTerminal('User clicked outside popup to close', 'interaction');
+            logToTerminal('User clicked outside trash popup to close', 'interaction');
             imagePopup.style.display = 'none';
         }
         if (event.target === musicWindow) {
@@ -206,12 +377,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const bartCharacter = document.querySelector('.bart-character');
     const contactWindow = document.querySelector('.contact-window');
     
+    console.log('Billie character found:', bartCharacter);
+    console.log('Contact window found:', contactWindow);
+    
     if (bartCharacter && contactWindow) {
         bartCharacter.addEventListener('click', function() {
+            console.log('Billie character clicked!');
             logToTerminal('User clicked on Billie character', 'interaction');
             setTimeout(() => {
                 logToTerminal('Opening contact information...', 'system');
                 contactWindow.style.display = 'block';
+                console.log('Contact window should now be visible');
             }, 100);
         });
         
@@ -516,6 +692,26 @@ function closeGalleryWindow() {
     } else {
         console.log('Gallery window element not found');
         logToTerminal('Error: Gallery window element not found', 'error');
+    }
+}
+
+// Trash popup functionality
+function openTrashPopup() {
+    const imagePopup = document.getElementById('imagePopup');
+    if (imagePopup) {
+        logToTerminal('User clicked on Trash can', 'interaction');
+        setTimeout(() => {
+            logToTerminal('Opening trash contents window...', 'system');
+            imagePopup.style.display = 'block';
+        }, 100);
+    }
+}
+
+function closeTrashPopup() {
+    const imagePopup = document.getElementById('imagePopup');
+    if (imagePopup) {
+        logToTerminal('User clicked red X to close trash window', 'interaction');
+        imagePopup.style.display = 'none';
     }
 }
 

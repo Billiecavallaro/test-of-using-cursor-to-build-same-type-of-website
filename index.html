@@ -11,9 +11,25 @@
         <!-- Menu Bar -->
         <div class="menu-bar">
             <div class="menu-left">
-                <span class="apple-logo">B</span>
-                <span class="menu-item">File</span>
-                <span class="menu-item">Edit</span>
+                <span class="apple-logo">☕️</span>
+                <div class="menu-item dropdown">
+                    <span class="dropdown-trigger">File</span>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item" data-action="about-me" onclick="window.open('https://www.notion.so/Billie-Cavallaro-249e7f3f02bb80d28e73eaeeb5a62bb9', '_blank'); document.querySelector('.dropdown').classList.remove('active'); console.log('Inline About Me click');">About Me</div>
+                        <div class="dropdown-item" data-action="portfolio" onclick="window.open('https://www.notion.so/249e7f3f02bb80b687abf03314aecf5a?v=249e7f3f02bb818e85a5000c84023268', '_blank'); document.querySelector('.dropdown').classList.remove('active'); console.log('Inline Portfolio click');">Portfolio</div>
+                        <div class="dropdown-item" data-action="music" onclick="document.getElementById('musicWindow').style.display='block'; document.querySelector('.dropdown').classList.remove('active'); console.log('Inline Music click');">Music</div>
+                        <div class="dropdown-item" data-action="photos" onclick="document.getElementById('galleryWindow').style.display='block'; setupPhotoHandlers(); document.querySelector('.dropdown').classList.remove('active'); console.log('Inline Photos click');">Photos</div>
+                        <div class="dropdown-item" data-action="press" onclick="window.open('https://www.notion.so/Press-249e7f3f02bb80b19ddadcccfeec8358', '_blank'); document.querySelector('.dropdown').classList.remove('active'); console.log('Inline Press click');">Press</div>
+                        <div class="dropdown-separator"></div>
+                        <div class="dropdown-item" data-action="contact" onclick="document.querySelector('.contact-window').style.display='block'; document.querySelector('.dropdown').classList.remove('active'); console.log('Inline Contact click');">Contact Billie</div>
+                    </div>
+                </div>
+                <div class="menu-item dropdown">
+                    <span class="dropdown-trigger">Edit</span>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-item joke-item">Just Kidding! haha</div>
+                    </div>
+                </div>
                 <span class="menu-item">View</span>
                 <span class="menu-item">Special</span>
             </div>
@@ -25,7 +41,7 @@
         <!-- Desktop Area -->
         <div class="desktop-area">
             <!-- Billie Photo Character -->
-            <div class="bart-character">
+            <div class="bart-character" onclick="document.querySelector('.contact-window').style.display='block'; console.log('Billie character clicked via inline handler');">
                 <div class="bart-icon">
                     <img src="https://i.imgur.com/E9e08VM.png" alt="Billie" width="58" height="58" style="border-radius: 8px; object-fit: cover;">
                 </div>
@@ -44,7 +60,7 @@
             <div class="music-window" id="musicWindow" style="display: none;">
                 <div class="window-header">
                     <div class="window-buttons">
-                        <span class="window-button close" id="closeMusicWindow">×</span>
+                        <span class="window-button close" id="closeMusicWindow" onclick="document.getElementById('musicWindow').style.display='none'; console.log('Music window closed');">×</span>
                     </div>
                     <div class="window-title">Music Studio</div>
                 </div>
@@ -185,7 +201,7 @@
             </div>
 
             <!-- Trash Can -->
-            <div class="trash-can" data-image="https://i.imgur.com/OxJ5cgT.png">
+            <div class="trash-can" onclick="openTrashPopup(); console.log('Trash can clicked - opening popup window');">
                 <div class="trash-icon">🗑️</div>
                 <div class="trash-label">Trash</div>
             </div>
@@ -194,7 +210,7 @@
             <div class="image-popup" id="imagePopup" style="display: none;">
                 <div class="popup-header">
                     <div class="popup-buttons">
-                        <span class="popup-button close" id="closePopup">×</span>
+                        <span class="popup-button close" id="closePopup" onclick="closeTrashPopup(); console.log('Close button clicked');">×</span>
                     </div>
                     <div class="popup-title">Trash Contents</div>
                 </div>
@@ -234,7 +250,7 @@
         <div class="contact-window">
             <div class="window-header">
                 <div class="window-buttons">
-                    <span class="window-button close"></span>
+                    <span class="window-button close" onclick="document.querySelector('.contact-window').style.display='none'; console.log('Contact window closed');"></span>
                     <span class="window-button minimize"></span>
                     <span class="window-button maximize"></span>
                 </div>
@@ -245,7 +261,7 @@
                     <p><strong>Email:</strong> <a href="mailto:billiejocavallaro@gmail.com">billiejocavallaro@gmail.com</a></p>
                     <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/billiecavallaro/" target="_blank">Billie Cavallaro</a></p>
                     <p><strong>Instagram:</strong> <a href="https://www.instagram.com/billie_jo_cavallaro/?hl=en" target="_blank">@billie_jo_cavallaro</a></p>
-                    <p><strong>YouTube:</strong> <a href="#" target="_blank">BillieCavallaro-AIProductBuild</a></p>
+                    <p><strong>YouTube:</strong> <a href="https://www.youtube.com/@BillieCavallaro-AIProductBuild" target="_blank">BillieCavallaro-AIProductBuild</a></p>
                 </div>
             </div>
         </div>
