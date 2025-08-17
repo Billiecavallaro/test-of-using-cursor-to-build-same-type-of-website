@@ -1233,6 +1233,14 @@ body {
         max-width: 70px;
     }
     
+    /* Fix trash can positioning for mobile */
+    .trash-can {
+        grid-column: 3;
+        grid-row: 6;
+        justify-self: end;
+        align-self: end;
+    }
+    
     .folder-icon, .trash-icon {
         font-size: 36px;
     }
@@ -1300,5 +1308,13 @@ body {
     
     .folder-label, .trash-label {
         font-size: 9px;
+    }
+    
+    /* Ensure trash can is visible on very small screens */
+    .trash-can {
+        grid-column: 3;
+        grid-row: 6;
+        justify-self: end;
+        align-self: end;
     }
 } 
