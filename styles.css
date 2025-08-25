@@ -1233,6 +1233,58 @@ body {
         max-width: 70px;
     }
     
+    /* Reset all folder positioning for mobile grid */
+    .folder, .trash-can, .bart-character {
+        grid-column: auto;
+        grid-row: auto;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    /* Specific mobile positioning for folders */
+    .folder[data-external*="Billie-Cavallaro"] {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-external*="Press"] {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-music="true"] {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-photos="true"] {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    /* Billie Character positioning for mobile */
+    .bart-character {
+        grid-column: 3;
+        grid-row: 2;
+        justify-self: center;
+        align-self: center;
+    }
+    
     /* Fix trash can positioning for mobile */
     .trash-can {
         grid-column: 3;
@@ -1308,6 +1360,57 @@ body {
     
     .folder-label, .trash-label {
         font-size: 9px;
+    }
+    
+    /* Reset all folder positioning for very small mobile grid */
+    .folder, .trash-can, .bart-character {
+        grid-column: auto;
+        grid-row: auto;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    /* Specific positioning for very small screens */
+    .folder[data-external*="Billie-Cavallaro"] {
+        grid-column: 1;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
+        grid-column: 2;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-external*="Press"] {
+        grid-column: 3;
+        grid-row: 1;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-music="true"] {
+        grid-column: 1;
+        grid-row: 2;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .folder[data-photos="true"] {
+        grid-column: 2;
+        grid-row: 2;
+        justify-self: center;
+        align-self: center;
+    }
+    
+    .bart-character {
+        grid-column: 3;
+        grid-row: 2;
+        justify-self: center;
+        align-self: center;
     }
     
     /* Ensure trash can is visible on very small screens */
