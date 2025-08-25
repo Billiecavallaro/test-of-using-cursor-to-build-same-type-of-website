@@ -1233,64 +1233,66 @@ body {
         max-width: 70px;
     }
     
-    /* Reset all folder positioning for mobile grid */
-    .folder, .trash-can, .bart-character {
-        grid-column: auto;
-        grid-row: auto;
-        justify-self: center;
-        align-self: center;
+    /* Override all desktop positioning for mobile */
+    .desktop-area .folder,
+    .desktop-area .trash-can,
+    .desktop-area .bart-character {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    /* Specific mobile positioning for folders */
-    .folder[data-external*="Billie-Cavallaro"] {
-        grid-column: 1;
-        grid-row: 1;
-        justify-self: center;
-        align-self: center;
+    /* Specific mobile positioning for folders - using !important to override desktop */
+    .desktop-area .folder[data-external*="Billie-Cavallaro"] {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-external*="Press"] {
-        grid-column: 3;
-        grid-row: 1;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-external*="Press"] {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-music="true"] {
-        grid-column: 1;
-        grid-row: 2;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-music="true"] {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-photos="true"] {
-        grid-column: 2;
-        grid-row: 2;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-photos="true"] {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
     /* Billie Character positioning for mobile */
-    .bart-character {
-        grid-column: 3;
-        grid-row: 2;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .bart-character {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
     /* Fix trash can positioning for mobile */
-    .trash-can {
-        grid-column: 3;
-        grid-row: 6;
-        justify-self: end;
-        align-self: end;
+    .desktop-area .trash-can {
+        grid-column: 3 !important;
+        grid-row: 6 !important;
+        justify-self: end !important;
+        align-self: end !important;
     }
     
     .folder-icon, .trash-icon {
@@ -1362,55 +1364,57 @@ body {
         font-size: 9px;
     }
     
-    /* Reset all folder positioning for very small mobile grid */
-    .folder, .trash-can, .bart-character {
-        grid-column: auto;
-        grid-row: auto;
-        justify-self: center;
-        align-self: center;
+    /* Override all desktop positioning for very small mobile grid */
+    .desktop-area .folder,
+    .desktop-area .trash-can,
+    .desktop-area .bart-character {
+        grid-column: auto !important;
+        grid-row: auto !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    /* Specific positioning for very small screens */
-    .folder[data-external*="Billie-Cavallaro"] {
-        grid-column: 1;
-        grid-row: 1;
-        justify-self: center;
-        align-self: center;
+    /* Specific positioning for very small screens - using !important to override desktop */
+    .desktop-area .folder[data-external*="Billie-Cavallaro"] {
+        grid-column: 1 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
-        grid-column: 2;
-        grid-row: 1;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-external*="249e7f3f02bb80b687abf03314aecf5a"] {
+        grid-column: 2 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-external*="Press"] {
-        grid-column: 3;
-        grid-row: 1;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-external*="Press"] {
+        grid-column: 3 !important;
+        grid-row: 1 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-music="true"] {
-        grid-column: 1;
-        grid-row: 2;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-music="true"] {
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .folder[data-photos="true"] {
-        grid-column: 2;
-        grid-row: 2;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .folder[data-photos="true"] {
+        grid-column: 2 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
-    .bart-character {
-        grid-column: 3;
-        grid-row: 2;
-        justify-self: center;
-        align-self: center;
+    .desktop-area .bart-character {
+        grid-column: 3 !important;
+        grid-row: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
     }
     
     /* Ensure trash can is visible on very small screens */
